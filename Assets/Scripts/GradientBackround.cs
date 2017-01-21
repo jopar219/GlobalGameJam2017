@@ -1,12 +1,16 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class GradientBackround : MonoBehaviour {
   public Color topColor;
   public Color bottomColor;
+  public Color[] colors = new Color[] {new Color(0.95f, 0.89f, 0.05f), new Color(0.92f, 0.7f, 0.02f), new Color(0.709f, 0.41f, 0.27f), new Color(0.109f, 0.009f, 0.009f), new Color(0.0f, 0.0f, 0.0f)}; 
   public int gradientLayer = 7;
+  public GameObject ball;
+  private Mesh mesh;
 
   void Awake() {
+
     gradientLayer = Mathf.Clamp(gradientLayer, 0, 31);
 
     if (!GetComponent<Camera>()) {
@@ -19,14 +23,13 @@ public class GradientBackround : MonoBehaviour {
     Camera gradientCam = new GameObject("Gradient Cam", typeof(Camera)).GetComponent<Camera>();
     gradientCam.depth = GetComponent<Camera>().depth - 1;
     gradientCam.cullingMask = 1 << gradientLayer;
- 
-    Mesh mesh = new Mesh();
+    
+    mesh = new Mesh();
     mesh.vertices = new Vector3[4]
       {new Vector3(-100f, .577f, 1f), new Vector3(100f, .577f, 1f), new Vector3(-100f, -.577f, 1f), new Vector3(100f, -.577f, 1f)};
- 
-    mesh.colors = new Color[4] {topColor, topColor, bottomColor, bottomColor};
- 
     mesh.triangles = new int[6] {0, 1, 2, 1, 3, 2};
+
+    mesh.colors = new Color[4] {topColor, topColor, bottomColor, bottomColor};
  
     Shader shader = Shader.Find("Gradient");
     Material mat = new Material(shader);
@@ -43,6 +46,31 @@ public class GradientBackround : MonoBehaviour {
   
   // Update is called once per frame
   void Update () {
-  
+    float tilNext = ball.GetComponent<BTBPlayerController>().TimeTilNextBounce;
+
+    if(tilNext <= 1.0f) {
+      bottomColor = colors[0];
+      topColor = colors[1];
+    }
+
+    else if(tilNext > 1.0f && tilNext <= 2.0f) {
+      bottomColor = colors[1];
+      topColor = colors[2];
+    }
+
+    else if(tilNext > 2.0f && tilNext <= 3.0f) {
+      bottomColor = colors[2];
+      topColor = colors[3];
+    }
+
+    else {
+      bottomColor = colors[3];
+      topColor = colors[4];
+    }
+    UpdateGradients();
+  }
+
+  void UpdateGradients() {
+    mesh.colors = new Color[4] {topColor, topColor, bottomColor, bottomColor};
   }
 }
