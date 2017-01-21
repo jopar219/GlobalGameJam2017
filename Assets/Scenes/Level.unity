@@ -193,9 +193,9 @@ GameObject:
   - 4: {fileID: 1998255212}
   - 212: {fileID: 1998255211}
   - 50: {fileID: 1998255210}
-  - 61: {fileID: 1998255209}
   - 96: {fileID: 1998255208}
   - 114: {fileID: 1998255207}
+  - 58: {fileID: 1998255209}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -216,6 +216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveForce: 20
+  TimeTilNextBounce: 1
 --- !u!96 &1998255208
 TrailRenderer:
   m_ObjectHideFlags: 0
@@ -267,11 +268,10 @@ TrailRenderer:
       rgba: 16777215
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
---- !u!61 &1998255209
-BoxCollider2D:
+--- !u!58 &1998255209
+CircleCollider2D:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 61000010097950976, guid: a10416154be7240f8a88392fd7e0988b,
-    type: 2}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1998255206}
   m_Enabled: 1
@@ -281,7 +281,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 0.2, y: 0.2}
+  m_Radius: 0.2
 --- !u!50 &1998255210
 Rigidbody2D:
   serializedVersion: 2
