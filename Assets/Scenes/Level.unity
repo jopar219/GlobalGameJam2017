@@ -425,6 +425,16 @@ Prefab:
       propertyPath: ball
       value: 
       objectReference: {fileID: 1998255206}
+    - target: {fileID: 114000013021528786, guid: 0a1aff0a50b40486db0c28deb00605df,
+        type: 2}
+      propertyPath: ZoomingFactor
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013021528786, guid: 0a1aff0a50b40486db0c28deb00605df,
+        type: 2}
+      propertyPath: MinYThreshold
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0a1aff0a50b40486db0c28deb00605df, type: 2}
   m_IsPrefabParent: 0

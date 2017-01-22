@@ -8,16 +8,19 @@ public class BTBCameraController : MonoBehaviour {
   public float MaxXThreshold;
   public float MinXThreshold;
   public float MaxOrthographicSizeThreshold;
+  public float ZoomingFactor;
 
   private Camera mainCamera;
   private float minOrthograficSize;
   private float maxOrthograficSize;
-  private float oldYTransform;
-  private float topYTransform;
+  private float oldYPosition;
+  private float topYPosition;
+  private float originalYPosition;
 
   void Start() {
     mainCamera = GetComponent<Camera>();
-    oldYTransform = transform.position.y;
+    originalYPosition = transform.position.y;
+    oldYPosition = transform.position.y;
     minOrthograficSize = mainCamera.orthographicSize;
     maxOrthograficSize = mainCamera.orthographicSize;
   }
@@ -32,23 +35,23 @@ public class BTBCameraController : MonoBehaviour {
     }
     
     if(TargetTransform.position.y < MinYThreshold) {
-      transform.position = new Vector3(transform.position.x, MinYThreshold, transform.position.z);
+      transform.position = new Vector3(transform.position.x, originalYPosition, transform.position.z);
       mainCamera.orthographicSize = minOrthograficSize;
     } else {
-      transform.position = new Vector3(transform.position.x, TargetTransform.position.y, transform.position.z);
-      if(transform.position.y > oldYTransform) {
+      transform.position = new Vector3(transform.position.x, TargetTransform.position.y - (MinYThreshold - originalYPosition), transform.position.z);
+      if(transform.position.y > oldYPosition) {
         if(mainCamera.orthographicSize < MaxOrthographicSizeThreshold) {
-          mainCamera.orthographicSize = minOrthograficSize + TargetTransform.position.y - MinYThreshold;
-          topYTransform = transform.position.y;
+          mainCamera.orthographicSize = minOrthograficSize + (TargetTransform.position.y - (MinYThreshold - originalYPosition)) * ZoomingFactor;
+          topYPosition = transform.position.y + (MinYThreshold - originalYPosition);
           maxOrthograficSize = mainCamera.orthographicSize;
         }
       } else {
-        if(TargetTransform.position.y < topYTransform) {
-          mainCamera.orthographicSize = maxOrthograficSize + TargetTransform.position.y - topYTransform;
+        if(TargetTransform.position.y < topYPosition) {
+          mainCamera.orthographicSize = maxOrthograficSize + (TargetTransform.position.y - topYPosition) * ZoomingFactor;
         }
       }
 
-      oldYTransform = transform.position.y;
+      oldYPosition = transform.position.y;
     }
   }
 }
