@@ -22,7 +22,8 @@ public class Bounce : MonoBehaviour {
   }
   
   void OnCollisionEnter2D(Collision2D coll) {
-
+	
+		Physics2D.gravity = new Vector2(Physics2D.gravity.x, -(1/Mathf.Pow(TimeTilNextBounce,1.7f))*60);
     velY = -0.5f * Physics2D.gravity.y * TimeTilNextBounce;
 
     rigidbody.velocity = new Vector2(coll.relativeVelocity.x, velY);
