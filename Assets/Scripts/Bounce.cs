@@ -37,7 +37,8 @@ public class Bounce : MonoBehaviour {
     //float newYPos = 2 * groundPos - contactCompare.y + gameObject.GetComponent<CircleCollider2D>().radius;
 
     //transform.position = new Vector2(transform.position.x, newYPos);
-
+	
+		Physics2D.gravity = new Vector2(Physics2D.gravity.x, -(1/Mathf.Pow(TimeTilNextBounce,1.7f))*60);
     velY = -0.5f * Physics2D.gravity.y * TimeTilNextBounce;
 
     rigidbody.velocity = new Vector2(coll.relativeVelocity.x, velY);
