@@ -48,15 +48,15 @@ public class TitleHueShift : MonoBehaviour {
 			img1.color = newColor;
 			img2.color = newColor;
 			img3.color = newColor;
+
+			ballRigidbody.AddForce(new Vector2(12, 0));
 		}
 		else {
 			score.GetComponent<Outline>().effectColor = newColor;
 			score.text = "Score: " + gameManager.Instance.points;
 		}
 
-		ballRigidbody.AddForce(new Vector2(12, 0));
-
-		if(Input.GetKey(KeyCode.Space)) {
+		if(Input.GetKey(KeyCode.Space) && !flag) {
 			flag = true;
 			Destroy(beat1.gameObject);
 			Destroy(beat2.gameObject);
