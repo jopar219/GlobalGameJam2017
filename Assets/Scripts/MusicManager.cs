@@ -45,15 +45,12 @@ public class MusicManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (currentSong != -1) {
-			Debug.Log ("curr1: " + currentIndex);
-			Debug.Log ("time: " + audioSource.time);
 			while (data[currentSong].data.Length > currentIndex &&
 				data[currentSong].data [currentIndex].time < audioSource.time) {
 
 				EmitEvent(data[currentSong].data[currentIndex].index);
 				currentIndex++;	
 			}
-			Debug.Log ("curr: " + currentIndex);
 		}
 	}
 
@@ -76,7 +73,13 @@ public class MusicManager : MonoBehaviour {
 	}
 		
 	public void Subscribe(SubscribeHandler callback, int instrument){
-		subscribers[instrument].Add(callback);
+		List<SubscribeHandler> subscriber;
+		if (!subscribers.TryGetValue (instrument, out subscriber)) {
+			subscribers [instrument] = new List<SubscribeHandler> ();
+			subscriber = subscribers [instrument];
+		}
+
+		subscriber.Add(callback);
 	}
 
 	public float GetTimeToNext(int instrument){
@@ -89,8 +92,6 @@ public class MusicManager : MonoBehaviour {
 		while (rightIndex < data [currentSong].data.Length && data [currentSong].data [rightIndex].index != instrument) {
 			rightIndex++;
 		}
-		Debug.Log ("l: " + leftIndex);
-		Debug.Log ("r: " + rightIndex);
 		if (leftIndex == -1)
 			return data [currentSong].data [rightIndex].time;
 		if (rightIndex == data [currentSong].data.Length)
