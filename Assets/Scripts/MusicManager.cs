@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class MusicManager : MonoBehaviour {
 
+	public static MusicManager instance;
 	[System.Serializable]
 	public struct Song{
 		[SerializeField] public AudioClip clip;
@@ -18,6 +19,15 @@ public class MusicManager : MonoBehaviour {
 
 	AudioSource audioSource;
 
+	void Awake(){
+		if (instance != null && instance != this) 
+		{
+			Destroy(this.gameObject);
+		}
+
+		instance = this;
+		DontDestroyOnLoad( this.gameObject );
+	}
 	void Start(){
 		audioSource = GetComponent<AudioSource> ();
 		data = new Track[songs.Length];
@@ -25,6 +35,7 @@ public class MusicManager : MonoBehaviour {
 		for (int i = 0; i < data.Length; i++) {
 			data [i] = new Track (songs [i].path);
 		}
+		PlaySong (0);
 	}
 
 
@@ -34,17 +45,24 @@ public class MusicManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (currentSong != -1) {
+			Debug.Log ("curr1: " + currentIndex);
+			Debug.Log ("time: " + audioSource.time);
 			while (data[currentSong].data.Length > currentIndex &&
 				data[currentSong].data [currentIndex].time < audioSource.time) {
+
 				EmitEvent(data[currentSong].data[currentIndex].index);
 				currentIndex++;	
 			}
+			Debug.Log ("curr: " + currentIndex);
 		}
 	}
 
 	void EmitEvent(int instrument){
-		for (int i = 0; i < subscribers [instrument].Count; i++) {
-			subscribers [instrument][i]();
+		List<SubscribeHandler> subscriber;
+		if (subscribers.TryGetValue (instrument, out subscriber)) {
+			for (int i = 0; i < subscriber.Count; i++) {
+				subscriber [i] ();
+			}
 		}
 	}
 
@@ -62,16 +80,21 @@ public class MusicManager : MonoBehaviour {
 	}
 
 	public float GetTimeToNext(int instrument){
-		int leftIndex = currentIndex;
+		int leftIndex = currentIndex-1;
 		int rightIndex = currentIndex;
 
-		while (data [currentSong].data [leftIndex].index != instrument) {
+		while (leftIndex >= 0 && data [currentSong].data [leftIndex].index != instrument) {
 			leftIndex--;
 		}
-		while (data [currentSong].data [rightIndex].index != instrument) {
+		while (rightIndex < data [currentSong].data.Length && data [currentSong].data [rightIndex].index != instrument) {
 			rightIndex++;
 		}
-
+		Debug.Log ("l: " + leftIndex);
+		Debug.Log ("r: " + rightIndex);
+		if (leftIndex == -1)
+			return data [currentSong].data [rightIndex].time;
+		if (rightIndex == data [currentSong].data.Length)
+			return 0;
 		return data [currentSong].data [rightIndex].time-data [currentSong].data [leftIndex].time;
 	}
 }
