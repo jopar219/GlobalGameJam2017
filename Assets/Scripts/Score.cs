@@ -13,6 +13,13 @@ public class Score : MonoBehaviour {
 
   }
 
+   void FixedUpdate() {
+    RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up);
+    if (hit.collider.gameObject.tag == "Obstacle") {
+      gameManager.Instance.points += 25;
+    }
+  }
+
   void OnCollisionEnter2D(Collision2D other) {
     if(other.gameObject.tag == "Obstacle") {
       gameManager.Instance.points -= 50;
