@@ -113,7 +113,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 487619983}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.65, z: 0}
+  m_LocalPosition: {x: 0, y: -1.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a7475806c9404ed996b6f2e9d9a912c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TilesPrefab: {fileID: 1000012745956444, guid: 02399ba02a645499789bdb0b974d70e9,
+  TilesPrefab: {fileID: 1000013270519860, guid: 9d41a2579d52a453f8a6fcd7d20c2ae5,
     type: 2}
   Target: {fileID: 1998255212}
   MainCamera: {fileID: 2145953645}
@@ -207,16 +207,16 @@ TrailRenderer:
   m_Colors:
     m_Color[0]:
       serializedVersion: 2
-      rgba: 4294967295
+      rgba: 4294967040
     m_Color[1]:
       serializedVersion: 2
-      rgba: 4294967295
+      rgba: 4287364864
     m_Color[2]:
       serializedVersion: 2
-      rgba: 4294967295
+      rgba: 4278255569
     m_Color[3]:
       serializedVersion: 2
-      rgba: 4294967295
+      rgba: 4278218751
     m_Color[4]:
       serializedVersion: 2
       rgba: 16777215
@@ -313,7 +313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b8a5da1b527941579f657e76fbcd569, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeTilNextBounce: 0.5
+  TimeTilNextBounce: 0.25
 --- !u!1 &2145953640
 GameObject:
   m_ObjectHideFlags: 0
