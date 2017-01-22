@@ -20,21 +20,6 @@ public class Bounce : MonoBehaviour {
 	}
   
   void OnCollisionEnter2D(Collision2D coll) {
-    /*
-    foreach(ContactPoint2D ballHit in coll.contacts) {
-      if(contactCompare == null) {
-        contactCompare = ballHit.point;
-      } else if(contactCompare.magnitude < ballHit.point.magnitude) {
-        contactCompare = ballHit.point;
-      }
-    }
-    */
-
-    //Correct overlap
-    //float groundPos = (coll.collider.transform.position.y + (coll.collider.transform.localScale.y / 2));
-    //float newYPos = 2 * groundPos - contactCompare.y + gameObject.GetComponent<CircleCollider2D>().radius;
-
-    //transform.position = new Vector2(transform.position.x, newYPos);
 
     velY = -0.5f * Physics2D.gravity.y * TimeTilNextBounce;
 
