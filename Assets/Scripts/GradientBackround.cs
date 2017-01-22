@@ -65,12 +65,14 @@ public class GradientBackround : MonoBehaviour {
   
   }
   
+  float timeElapsed = 0;
   // Update is called once per frame
   void Update () {
     float ballPos = Mathf.Ceil(ball.transform.position.y);
-    float rango = 200.0f;
+    float rango = 150.0f;
     
-    hue = ballPos / rango;
+	timeElapsed += Time.deltaTime*4;
+	hue = (ballPos+timeElapsed) / rango;
     while(hue > 1) {
       hue -= 1;
     }
