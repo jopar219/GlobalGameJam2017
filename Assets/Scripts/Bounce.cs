@@ -18,25 +18,10 @@ public class Bounce : MonoBehaviour {
   void Update () {
     Debug.Log ("1: "+MusicManager.instance.GetTimeToNext (0));
     Debug.Log ("2: "+MusicManager.instance.GetTimeToNext (0));
-	TimeTilNextBounce = MusicManager.instance.GetTimeToNext (0);
+	  TimeTilNextBounce = MusicManager.instance.GetTimeToNext (0);
   }
   
   void OnCollisionEnter2D(Collision2D coll) {
-    /*
-    foreach(ContactPoint2D ballHit in coll.contacts) {
-      if(contactCompare == null) {
-        contactCompare = ballHit.point;
-      } else if(contactCompare.magnitude < ballHit.point.magnitude) {
-        contactCompare = ballHit.point;
-      }
-    }
-    */
-
-    //Correct overlap
-    //float groundPos = (coll.collider.transform.position.y + (coll.collider.transform.localScale.y / 2));
-    //float newYPos = 2 * groundPos - contactCompare.y + gameObject.GetComponent<CircleCollider2D>().radius;
-
-    //transform.position = new Vector2(transform.position.x, newYPos);
 	
 		Physics2D.gravity = new Vector2(Physics2D.gravity.x, -(1/Mathf.Pow(TimeTilNextBounce,1.7f))*60);
     velY = -0.5f * Physics2D.gravity.y * TimeTilNextBounce;
