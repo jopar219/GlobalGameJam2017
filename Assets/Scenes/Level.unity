@@ -353,6 +353,26 @@ Prefab:
       propertyPath: ball
       value: 
       objectReference: {fileID: 1998255206}
+    - target: {fileID: 223000014230026212, guid: b9b7b482010b8fc4499784e803fa01f5,
+        type: 2}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 223000014230026212, guid: b9b7b482010b8fc4499784e803fa01f5,
+        type: 2}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 2145953645}
+    - target: {fileID: 223000014230026212, guid: b9b7b482010b8fc4499784e803fa01f5,
+        type: 2}
+      propertyPath: m_SortingOrder
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013938310742, guid: b9b7b482010b8fc4499784e803fa01f5,
+        type: 2}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b9b7b482010b8fc4499784e803fa01f5, type: 2}
   m_IsPrefabParent: 0
