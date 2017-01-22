@@ -23,8 +23,8 @@ GameObject:
   - 50: {fileID: 50000012089136442}
   - 96: {fileID: 96000013140379402}
   - 114: {fileID: 114000011874758602}
-  - 58: {fileID: 58000012385962790}
-  - 114: {fileID: 114000010806004290}
+  - 58: {fileID: 58000011845021008}
+  - 114: {fileID: 114000010955876054}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -39,7 +39,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012363860776}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10.47, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -62,7 +62,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!58 &58000012385962790
+--- !u!58 &58000011845021008
 CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -70,7 +70,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 1000012363860776}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: afd40ede566f84ff9919d2f4d0b82e4c, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
@@ -89,7 +89,7 @@ TrailRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -111,22 +111,22 @@ TrailRenderer:
   m_Colors:
     m_Color[0]:
       serializedVersion: 2
-      rgba: 4278190335
+      rgba: 4294967040
     m_Color[1]:
       serializedVersion: 2
-      rgba: 4278229503
+      rgba: 4287364864
     m_Color[2]:
       serializedVersion: 2
-      rgba: 4278255611
+      rgba: 4278255569
     m_Color[3]:
       serializedVersion: 2
-      rgba: 4278255501
+      rgba: 4278218751
     m_Color[4]:
       serializedVersion: 2
-      rgba: 16645376
+      rgba: 16777215
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
---- !u!114 &114000010806004290
+--- !u!114 &114000010955876054
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -134,12 +134,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000012363860776}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1324d7331434a49a59009b1e2f2a4956, type: 3}
+  m_Script: {fileID: 11500000, guid: 0b8a5da1b527941579f657e76fbcd569, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Duration: 0
-  MainCamera: {fileID: 0}
-  MagnitudeScaleFactor: 0
+  TimeTilNextBounce: 0.25
 --- !u!114 &114000011874758602
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -182,7 +180,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

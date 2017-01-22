@@ -99,12 +99,17 @@ public class MusicRecorder : MonoBehaviour {
 	int currentTrack = -1;
 	public void ChangeTrack(int i){
 		Debug.Log ("Changing track to: " + i);
-		if (currentTrack != -1) {
+		/*if (currentTrack != -1) {
 			Save ();
-		}
+		}*/
 		currentTrack = i;
 		audioSource.clip = tracks [currentTrack];
-	}
+		audioSource.time = 0;
+		for(int it = 0; it < instruments.Count; it++){
+			Destroy(instruments[it].gameObject);
+		}
+		instruments.Clear();
+	}	
 
 	public void Seek(float value){
 		float timeToSet = value * audioSource.clip.length;
@@ -124,25 +129,21 @@ public class MusicRecorder : MonoBehaviour {
 	}
 
 	public void Load(){
-		string data = File.ReadAllText(path.text);
-		TrackData[] tmp = JsonUtility.FromJson<TrackDataWrapper> (data).data;
-		if (tmp != null) {
-			recording = new List<TrackData> (tmp);
-		}
+		recording = new List<TrackData>((new Track(path.text)).data);
+
 		int instrumentNum = -1;
 		for (int i = 0; i < recording.Count; i++) {
 			if (recording [i].index > instrumentNum) {
 				instrumentNum = recording [i].index;
 			}
 		}
-		for (int i = 0; i < instrumentNum+1; i++) {
+		for (int i = 0; i < instrumentNum+1-instruments.Count; i++) {
 			AddInstrument ();
 		}
 		currentIndex = 0;
 	}
 	public void Save(){
-		string data = JsonUtility.ToJson (new TrackDataWrapper(recording.ToArray()));
-		Debug.Log ("Saving to " + path.text);
-		File.WriteAllText(path.text, data);
+		Track track = new Track (recording.ToArray ());
+		track.Save (path.text);
 	}
 }
