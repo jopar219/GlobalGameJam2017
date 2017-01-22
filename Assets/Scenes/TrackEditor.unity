@@ -1883,11 +1883,15 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: Power Up
+    - m_Text: Night Rave
       m_Image: {fileID: 0}
-    - m_Text: Song 2
+    - m_Text: Tech Talk
       m_Image: {fileID: 0}
-    - m_Text: Song 3
+    - m_Text: Moose
+      m_Image: {fileID: 0}
+    - m_Text: Electrorock
+      m_Image: {fileID: 0}
+    - m_Text: Transportation
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2136,9 +2140,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recording: []
   tracks:
-  - {fileID: 8300000, guid: e8a0c09cf8ca44310b706cbeb5bf6b4e, type: 3}
-  - {fileID: 8300000, guid: e8a0c09cf8ca44310b706cbeb5bf6b4e, type: 3}
-  - {fileID: 8300000, guid: e8a0c09cf8ca44310b706cbeb5bf6b4e, type: 3}
+  - {fileID: 8300000, guid: fb0618d8ec5db4dcf8456737b4fcbf74, type: 3}
+  - {fileID: 8300000, guid: 7398e46d577e64597a4729f9ded19c37, type: 3}
+  - {fileID: 8300000, guid: cdda49526b7e841bcb6f7a850ecb958e, type: 3}
+  - {fileID: 8300000, guid: 9a5fada58a8cb42d89eeb3fce90f0855, type: 3}
+  - {fileID: 8300000, guid: fb7bc367fc6fd481593361b47abb0d92, type: 3}
   Content: {fileID: 107519525}
   InstrumentPrefab: {fileID: 1000010743062164, guid: 7cdca40438bf644b5ac9e7b0de14df1d,
     type: 2}
@@ -3464,7 +3470,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Power Up
+  m_Text: Night Rave
 --- !u!222 &1866054403
 CanvasRenderer:
   m_ObjectHideFlags: 0
