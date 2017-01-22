@@ -12,14 +12,12 @@ public class BTBCameraController : MonoBehaviour {
   private Camera camera;
   private float minOrthograficSize;
   private float maxOrthograficSize;
-  private float minXTransform;
   private float oldYTransform;
   private float topYTransform;
 
   void Start() {
     camera = GetComponent<Camera>();
     oldYTransform = transform.position.y;
-    minXTransform = camera.transform.position.x;
     minOrthograficSize = camera.orthographicSize;
     maxOrthograficSize = camera.orthographicSize;
   }
@@ -35,9 +33,9 @@ public class BTBCameraController : MonoBehaviour {
     
     if(TargetTransform.position.y < MinYThreshold) {
       transform.position = new Vector3(transform.position.x, MinYThreshold, transform.position.z);
+      camera.orthographicSize = minOrthograficSize;
     } else {
       transform.position = new Vector3(transform.position.x, TargetTransform.position.y, transform.position.z);
-      
       if(transform.position.y > oldYTransform) {
         if(camera.orthographicSize < MaxOrthographicSizeThreshold) {
           camera.orthographicSize = minOrthograficSize + TargetTransform.position.y - MinYThreshold;
