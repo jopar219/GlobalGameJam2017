@@ -11,6 +11,7 @@ public class InfiniteBackground : MonoBehaviour {
   private float tileWidth;
   private int currentTile;
   private List<GameObject> tiles;
+  private int neededTiles;
 
   private int nextTile {
     get {
@@ -18,16 +19,21 @@ public class InfiniteBackground : MonoBehaviour {
     }
   }
 
+  void PlaceTile() {
+    tiles[nextTile].transform.position = new Vector2(tiles[currentTile].transform.position.x + tileWidth, tiles[currentTile].transform.position.y);
+
+    currentTile = nextTile;
+  }
+
 	// Use this for initialization
 	void Start () {
     GameObject tile = (GameObject) GameObject.Instantiate(TilesPrefab, transform);
+    tile.transform.localPosition = Vector3.zero;
 
-	  tileWidth = tile.GetComponent<SpriteRenderer>().sprite.bounds.size.x * tile.transform.localScale.x;
-    currentTile = 0;
+	  tileWidth = tile.GetComponent<SpriteRenderer>().sprite.bounds.size.x * tile.transform.localScale.x - 0.05f;
+    currentTile = 1;
     
-    int neededTiles = (int) Mathf.Ceil((MainCamera.orthographicSize * 2 * MainCamera.aspect) / tileWidth) + 1;
-
-    Debug.Log(neededTiles);
+    neededTiles = (int) Mathf.Ceil((MainCamera.orthographicSize * 2 * MainCamera.aspect) / tileWidth) + 2;
 
     tiles = new List<GameObject>(neededTiles);
 
@@ -35,10 +41,23 @@ public class InfiniteBackground : MonoBehaviour {
 
     for(int i = 1; i < neededTiles; i++) {
       tiles.Add((GameObject) GameObject.Instantiate(TilesPrefab, transform));
+      tiles[i].transform.localPosition = Vector3.zero;
     }
 	}
 	
 	// Update is called once per frame
 	void Update () {
+    neededTiles = (int) Mathf.Ceil((MainCamera.orthographicSize * 2 * MainCamera.aspect) / tileWidth) + 2;
+    
+    if(neededTiles > tiles.Count) {
+      for(int i = tiles.Count; i < neededTiles; i++) {
+        tiles.Add((GameObject) GameObject.Instantiate(TilesPrefab, transform));
+        tiles[i].transform.localPosition = Vector3.zero;
+      }
+    }
+
+    if(tiles[currentTile].transform.position.x - Target.position.x < tileWidth) {
+      PlaceTile();
+    }
 	}
 }

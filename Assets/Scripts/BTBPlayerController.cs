@@ -8,7 +8,6 @@ public class BTBPlayerController : MonoBehaviour {
   public float MaxSpeed;
   public float XVelocityScaling;
 
-  private bool isPushing;
   private Rigidbody2D playerRigidbody;
 
   void Start () {
@@ -16,17 +15,15 @@ public class BTBPlayerController : MonoBehaviour {
   }
   
 	void Update () {
-    isPushing = false;
-
 	  if(Input.GetKey(KeyCode.Space)) {
       if(playerRigidbody.velocity.x < MaxSpeed) {
         playerRigidbody.AddForce(new Vector2(MoveForce, 0));
       }
-    } else if(rigidbody.velocity.x > 0){
-      if(Mathf.Abs(rigidbody.velocity.x) > 0.01) {
-        rigidbody.velocity = new Vector2(rigidbody.velocity.x * XVelocityScaling , rigidbody.velocity.y);
+    } else if(playerRigidbody.velocity.x > 0){
+      if(Mathf.Abs(playerRigidbody.velocity.x) > 0.01) {
+        playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x * XVelocityScaling , playerRigidbody.velocity.y);
       } else {
-        rigidbody.velocity = new Vector2(0, rigidbody.velocity.y);
+        playerRigidbody.velocity = new Vector2(0, playerRigidbody.velocity.y);
       }
     }
 
@@ -35,8 +32,6 @@ public class BTBPlayerController : MonoBehaviour {
       if(playerRigidbody.velocity.x > -MaxSpeed) {
         playerRigidbody.AddForce(new Vector2(-MoveForce, 0));
       }
-
-      isPushing = true;
     }
   }
 }

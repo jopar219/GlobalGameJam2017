@@ -33,7 +33,7 @@ public class BTBCameraController : MonoBehaviour {
     
     if(TargetTransform.position.y < MinYThreshold) {
       transform.position = new Vector3(transform.position.x, MinYThreshold, transform.position.z);
-      camera.orthographicSize = minOrthograficSize;
+      mainCamera.orthographicSize = minOrthograficSize;
     } else {
       transform.position = new Vector3(transform.position.x, TargetTransform.position.y, transform.position.z);
       if(transform.position.y > oldYTransform) {
