@@ -218,7 +218,7 @@ MonoBehaviour:
   MoveForce: 10
   MaxSpeed: 5
   XVelocityScaling: 0.95
-  TimeTilNextBounce: 2
+  TimeTilNextBounce: 4
 --- !u!96 &1998255208
 TrailRenderer:
   m_ObjectHideFlags: 0
@@ -549,6 +549,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fff736f8b838ab04cb3ba6b66fd54129, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  topColor: {r: 0, g: 0, b: 0, a: 0}
-  bottomColor: {r: 0.9558824, g: 0.7284483, b: 0, a: 0}
   gradientLayer: 7
+  ball: {fileID: 1998255206}
