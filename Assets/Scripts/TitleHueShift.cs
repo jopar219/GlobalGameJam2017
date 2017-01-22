@@ -6,6 +6,7 @@ public class TitleHueShift : MonoBehaviour {
 	public Text beat1;
 	public Text the;
 	public Text beat2;
+	public Text score;
 
 	public Image img1;
 	public Image img2;
@@ -18,6 +19,7 @@ public class TitleHueShift : MonoBehaviour {
 	float saturation;
 	float value;
 
+	private bool flag = false;
 	private Rigidbody2D ballRigidbody;
 
 	// Use this for initialization
@@ -38,18 +40,30 @@ public class TitleHueShift : MonoBehaviour {
 
 		Color newColor = Color.HSVToRGB(hue, saturation, value);
 
-		beat1.GetComponent<Outline>().effectColor = newColor;
-		beat2.GetComponent<Outline>().effectColor = newColor;
-		the.GetComponent<Outline>().effectColor = newColor;
+		if(!flag) {
+			beat1.GetComponent<Outline>().effectColor = newColor;
+			beat2.GetComponent<Outline>().effectColor = newColor;
+			the.GetComponent<Outline>().effectColor = newColor;
 
-		img1.color = newColor;
-		img2.color = newColor;
-		img3.color = newColor;
+			img1.color = newColor;
+			img2.color = newColor;
+			img3.color = newColor;
+		}
+		else {
+			score.GetComponent<Outline>().effectColor = newColor;
+			score.text = "Score: " + gameManager.Instance.points;
+		}
 
 		ballRigidbody.AddForce(new Vector2(12, 0));
 
 		if(Input.GetKey(KeyCode.Space)) {
-			Destroy(gameObject);
+			flag = true;
+			Destroy(beat1.gameObject);
+			Destroy(beat2.gameObject);
+			Destroy(the.gameObject);
+			Destroy(img1.gameObject);
+			Destroy(img2.gameObject);
+			Destroy(img3.gameObject);
 		}
 	}
 }
