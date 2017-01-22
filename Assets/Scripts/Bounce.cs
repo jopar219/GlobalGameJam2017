@@ -16,9 +16,7 @@ public class Bounce : MonoBehaviour {
 	
   // Update is called once per frame
   void Update () {
-    Debug.Log ("1: "+MusicManager.instance.GetTimeToNext (0));
-    Debug.Log ("2: "+MusicManager.instance.GetTimeToNext (0));
-	  TimeTilNextBounce = MusicManager.instance.GetTimeToNext (0);
+     TimeTilNextBounce = MusicManager.instance.GetTimeToNext (0);
   }
   
   void OnCollisionEnter2D(Collision2D coll) {
