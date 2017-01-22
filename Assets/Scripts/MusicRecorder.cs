@@ -6,27 +6,7 @@ using System.IO;
 
 public class MusicRecorder : MonoBehaviour {
 
-	[System.Serializable]
-	public class Wrapper{
-		public Wrapper(Data[] data){
-			this.data = data;
-		}
-		[SerializeField]
-		public Data[] data;
-	}
-
-	[System.Serializable]
-	public struct Data{
-		public Data(float time, int index){
-			this.time = time;
-			this.index = index;
-		}
-		[SerializeField]
-		public float time;
-		[SerializeField]
-		public int index;
-	}
-	public List<Data> recording = new List<Data>();
+	public List<TrackData> recording = new List<TrackData>();
 
 	public AudioClip[] tracks;
 	public RectTransform Content;
@@ -72,7 +52,7 @@ public class MusicRecorder : MonoBehaviour {
 				continue;
 			if (Input.GetKeyDown (instruments [i].key)) {
 				Debug.Log ("Recording data: " + audioSource.time + ", " + i);
-				recording.Add (new Data(audioSource.time, i));
+				recording.Add (new TrackData(audioSource.time, i));
 				instruments [i].LightUp();
 			}
 		}
@@ -145,9 +125,9 @@ public class MusicRecorder : MonoBehaviour {
 
 	public void Load(){
 		string data = File.ReadAllText(path.text);
-		Data[] tmp = JsonUtility.FromJson<Wrapper> (data).data;
+		TrackData[] tmp = JsonUtility.FromJson<TrackDataWrapper> (data).data;
 		if (tmp != null) {
-			recording = new List<Data> (tmp);
+			recording = new List<TrackData> (tmp);
 		}
 		int instrumentNum = -1;
 		for (int i = 0; i < recording.Count; i++) {
@@ -161,7 +141,7 @@ public class MusicRecorder : MonoBehaviour {
 		currentIndex = 0;
 	}
 	public void Save(){
-		string data = JsonUtility.ToJson (new Wrapper(recording.ToArray()));
+		string data = JsonUtility.ToJson (new TrackDataWrapper(recording.ToArray()));
 		Debug.Log ("Saving to " + path.text);
 		File.WriteAllText(path.text, data);
 	}
