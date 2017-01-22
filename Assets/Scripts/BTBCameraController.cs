@@ -9,19 +9,17 @@ public class BTBCameraController : MonoBehaviour {
   public float MinXThreshold;
   public float MaxOrthographicSizeThreshold;
 
-  private Camera camera;
+  private Camera mainCamera;
   private float minOrthograficSize;
   private float maxOrthograficSize;
-  private float minXTransform;
   private float oldYTransform;
   private float topYTransform;
 
   void Start() {
-    camera = GetComponent<Camera>();
+    mainCamera = GetComponent<Camera>();
     oldYTransform = transform.position.y;
-    minXTransform = camera.transform.position.x;
-    minOrthograficSize = camera.orthographicSize;
-    maxOrthograficSize = camera.orthographicSize;
+    minOrthograficSize = mainCamera.orthographicSize;
+    maxOrthograficSize = mainCamera.orthographicSize;
   }
 
   void Update () {
@@ -39,14 +37,14 @@ public class BTBCameraController : MonoBehaviour {
       transform.position = new Vector3(transform.position.x, TargetTransform.position.y, transform.position.z);
       
       if(transform.position.y > oldYTransform) {
-        if(camera.orthographicSize < MaxOrthographicSizeThreshold) {
-          camera.orthographicSize = minOrthograficSize + TargetTransform.position.y - MinYThreshold;
+        if(mainCamera.orthographicSize < MaxOrthographicSizeThreshold) {
+          mainCamera.orthographicSize = minOrthograficSize + TargetTransform.position.y - MinYThreshold;
           topYTransform = transform.position.y;
-          maxOrthograficSize = camera.orthographicSize;
+          maxOrthograficSize = mainCamera.orthographicSize;
         }
       } else {
         if(TargetTransform.position.y < topYTransform) {
-          camera.orthographicSize = maxOrthograficSize + TargetTransform.position.y - topYTransform;
+          mainCamera.orthographicSize = maxOrthograficSize + TargetTransform.position.y - topYTransform;
         }
       }
 

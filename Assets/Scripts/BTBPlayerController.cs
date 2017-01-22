@@ -10,20 +10,20 @@ public class BTBPlayerController : MonoBehaviour {
   public float TimeTilNextBounce;
 
   private bool isPushing;
-  private Rigidbody2D rigidbody;
+  private Rigidbody2D playerRigidbody;
   private float velY;
   private Vector2 contactCompare;
 
   void Start () {
-    rigidbody = GetComponent<Rigidbody2D>();
+    playerRigidbody = GetComponent<Rigidbody2D>();
   }
   
 	void Update () {
     isPushing = false;
 
 	  if(Input.GetKey(KeyCode.RightArrow)) {
-      if(rigidbody.velocity.x < MaxSpeed) {
-        rigidbody.AddForce(new Vector2(MoveForce, 0));
+      if(playerRigidbody.velocity.x < MaxSpeed) {
+        playerRigidbody.AddForce(new Vector2(MoveForce, 0));
       }
 
       isPushing = true;
@@ -32,8 +32,8 @@ public class BTBPlayerController : MonoBehaviour {
     //Movement to the left
     /*
     if(Input.GetKey(KeyCode.LeftArrow)) {
-      if(rigidbody.velocity.x > -MaxSpeed) {
-        rigidbody.AddForce(new Vector2(-MoveForce, 0));
+      if(playerRigidbody.velocity.x > -MaxSpeed) {
+        playerRigidbody.AddForce(new Vector2(-MoveForce, 0));
       }
 
       isPushing = true;
@@ -41,10 +41,10 @@ public class BTBPlayerController : MonoBehaviour {
     */
     
     if(!isPushing) {
-      if(Mathf.Abs(rigidbody.velocity.x) > 0.01) {
-        rigidbody.velocity = new Vector2(rigidbody.velocity.x * XVelocityScaling , rigidbody.velocity.y);
+      if(Mathf.Abs(playerRigidbody.velocity.x) > 0.01) {
+        playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x * XVelocityScaling , playerRigidbody.velocity.y);
       } else {
-        rigidbody.velocity = new Vector2(0, rigidbody.velocity.y);
+        playerRigidbody.velocity = new Vector2(0, playerRigidbody.velocity.y);
       }
     }
   }
@@ -53,14 +53,9 @@ public class BTBPlayerController : MonoBehaviour {
 
     foreach(ContactPoint2D ballHit in other.contacts)
     {
-      if(contactCompare == null) {
+      if(contactCompare.magnitude < ballHit.point.magnitude) {
         contactCompare = ballHit.point;
-      }
-      else {
-        if(contactCompare.magnitude < ballHit.point.magnitude) {
-          contactCompare = ballHit.point;
-        }
-      }
+      }      
     }
     
     //Correct overlap
@@ -70,6 +65,6 @@ public class BTBPlayerController : MonoBehaviour {
     transform.position = new Vector2(transform.position.x, newYPos);
 
     velY = -0.5f * Physics2D.gravity.y * TimeTilNextBounce;
-    rigidbody.velocity = new Vector2(rigidbody.velocity.x, velY);
+    playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x, velY);
   }
 }
